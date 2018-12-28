@@ -1,4 +1,4 @@
-# algorithm
+# SandBox
 This repository is sandbox for python.
 
 I will write code that various algorithm.
