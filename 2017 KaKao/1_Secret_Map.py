@@ -1,51 +1,72 @@
+# Calculate binary(Find secret map)
+def makeBinary(x):
+        result = []
+        while(x>1):
+                r = int(x % 2)
+                x = x / 2
+                result.append(r)
+                
+                # exception
+                if x<2 and r==0:
+                    result.append(1)
+        return(result)
 
-n = input('지도의 크기를 입력하세요 : ')
+# Find Secretmap
+def findMap(m1,m2,n):
+        result = []
+        for i in range(n):
+                if ((m1[i] | m2[i]) == 1):
+                        result[i] = '#'
+                else:
+                        result[i] = ' '
+        return (result)
+
+# Input map size
+n = input("지도의 크기를 입력하세요 : ")
 n = int(n)
 
-map1 = [[0 for i in range(n)] for j in range(n)]
-map2 = [[0 for i in range(n)] for j in range(n)]
-secret_map = [[0 for i in range(n)] for j in range(n)]
+# Initialize map
+map1 = [0 for i in range(n)]
+map2 = [0 for i in range(n)]
+secret_map = [0 for in range(n)]
 
+# Input each row value
 for i in range(n):
-    for j in range(n):
-        map1[i][j] = input("지도1의 데이터를 입력하세요 : ")
-        map1[i][j] = int(map1[i][j])
+        k = input("Map1의 {}번 데이터를 입력하세요 : ".format(i+1))
+        map1.append(i)
 
-print("지도 1의 데이터 입력이 끝났습니다.")
+
+print("Map1 의 데이터입력을 마쳤습니다")
 print()
 
-for x in range(n):
-    for y in range(n):
-        map2[x][y] = input("지도2의 데이터를 입력하세요 : ")
-        map2[i][j] = int(map2[i][j])
-
-print('MAP1')
 for i in range(n):
-    for j in range(n):
-        print(map1[i][j], end=' ')
-    print()
+        k = input("Map2의 {}번 데이터를 입력하세요 : ".format(i+1))
+        map2.append(i)
 
+
+print("Map2 의 데이터입력을 마쳤습니다")
 print()
 
-print('MAP2')
-for i in range(n):
-    for j in range(n):
-        print(map2[i][j], end=' ')
-    print()
+
+# Do it
+map1_b = makeBinary(map1).reverse
+map2_b = makeBinary(map2).reverse
+secret_map = findMap(map1_b,map2_b,n)
+
+print(secret_map)
 
 
 
-print("Secret Map")
-for i in range(n):
-    for j in range(n):
-        secret_map[i][j] = map1[i][j] | map2[i][j]
-        secret_map[i][j] = int(secret_map[i][j])
-    
+'''
+Sequence
 
+Input n
+Input map1,2
 
+Compare map1,2(bit operation) and make secretmap
+Convert data in secretmap (decimal -> binary)
+Convert data (binary-> '#', ' ')
 
-print("Secret Map")
-for i in range(n):
-    for j in range(n):
-        print(secret_map[i][j], end=' ')
-    print()
+Print result
+
+'''
