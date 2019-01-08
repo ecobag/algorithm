@@ -2,22 +2,27 @@ import pygame
 import sys
 from time import sleep
 
-BLACK = (0,0,0)
 padWidth = 480
 padHeight = 640
 
-# initialize variables
+# draw image
+def drawObject(obj, x, y):
+    global gamePad
+    gamePad.blit(obj,(x,y))
+
+# initialize variables 
 def initGame():
-    global gamepad, clock
+    global gamePad, clock, background
     pygame.init()
-    gamepad = pygame.display.set_mode((padWidth, padHeight))
+    gamePad = pygame.display.set_mode((padWidth, padHeight))
     pygame.display.set_caption('Pyshooting')
+    background = pygame.image.load('src/background.png')
     clock = pygame.time.Clock()
 
 
 # Game logic
 def runGame():
-    global gamepad, clock
+    global gamePad, clock, background
     
     onGame = False
     while not onGame:
@@ -26,7 +31,7 @@ def runGame():
                 pygame.quit()
                 sys.exit()
         
-        gamepad.fill(BLACK)
+        drawObject(background, 0, 0)
 
         pygame.display.update()
 
